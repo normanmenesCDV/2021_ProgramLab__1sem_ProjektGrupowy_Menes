@@ -1,6 +1,6 @@
 ﻿// komentarzami zostaną oznaczone osoby, które odpowiadają za dany element kodu
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
+    Norman Menes
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include <iostream>
