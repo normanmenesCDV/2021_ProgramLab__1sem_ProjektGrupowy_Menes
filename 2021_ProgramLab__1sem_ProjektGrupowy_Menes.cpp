@@ -1,6 +1,12 @@
 ﻿// komentarzami zostaną oznaczone osoby, które odpowiadają za dany element kodu
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    Norman Menes
+    Autorzy:
+        * Norman Menes
+        * Dawid Gorniaczyk
+        * Kamil Ławrynowicz
+        * Maciej Witkowski
+        * Michal Kudlinski
+        * Wojtek Janicki
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include <iostream>
