@@ -13,6 +13,11 @@
 
 using namespace std;
 
+void write_menu_restaurant_page()
+{
+    cout << "MENU RESTAURACJI\n";
+}
+
 int main()
 {
 
