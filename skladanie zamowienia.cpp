@@ -30,7 +30,7 @@ int main() {
 		case 2:
 			cout << "wybierz numer zupy :) (0-1) ";
 			cin >> numer;
-			while (numer > 4) {
+			while (numer > 1) {
 				cout << "wybierz poprawny numer dania (0-1)";
 				cin >> numer;
 			}
@@ -43,7 +43,7 @@ int main() {
 		case 3:
 			cout << "wybierz numer dania glownego :) (0-5)";
 			cin >> numer;
-			while (numer > 4) {
+			while (numer > 5) {
 				cout << "wybierz poprawny numer dania (0-5)";
 				cin >> numer;
 			}
@@ -57,7 +57,7 @@ int main() {
 		case 4:
 			cout << " wybierz numer deseru :) (0-2)";
 			cin >> numer;
-			while (numer > 4) {
+			while (numer > 2) {
 				cout << "wybierz poprawny numer dania (0-2)";
 				cin >> numer;
 			}
@@ -69,7 +69,7 @@ int main() {
 		case 5:
 			cout << "wybierz numer napoju :) (0-6)";
 			cin >> numer;
-			while (numer > 4) {
+			while (numer > 6) {
 				cout << "wybierz poprawny numer dania (0-6)";
 				cin >> numer;
 			}
