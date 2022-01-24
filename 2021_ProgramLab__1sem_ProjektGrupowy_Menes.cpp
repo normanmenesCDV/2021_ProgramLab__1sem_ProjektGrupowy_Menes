@@ -1,32 +1,72 @@
-﻿// komentarzami zostaną oznaczone osoby, które odpowiadają za dany element kodu
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    Autorzy:
-        * Norman Menes
-        * Dawid Gorniaczyk
-        * Kamil Ławrynowicz
-        * Maciej Witkowski
-        * Michal Kudlinski
-        * Wojtek Janicki
-
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-#include <iostream>
-
+﻿#include <iostream>
+#include <string>
 #include <cstdlib>
 
 using namespace std;
 
-    	string P[5] = { "Tortilla Rolls (150g) ", "Krazki Cebulowe (9szt) ", "Salsa Nachos (150g) ", "Nachos Ser (150g) ","Frytki (100g) "};
-	string Z[2] = { "Carpacio (200ml) ","Krem z kukurydzy (200ml) " };
-	string G[6]{"Quesadilla z kurczakiem (1szt) ","Enchiladas z kurczakiem (3szt) ","Enchiladas z wolowina (3szt) ","Grillowana piers z kurczaka z sosoem salsa mojito 180g) ","Tacos z kurczakiem (3 szt) ","Tacos z rostbefem (3szt) "};
-	string D[3] = { "Brownie (150g) ","Cremme Bruelle (100g) ","Sernik Mango (120g) " };
-	string N[7] = { "Herbata ","Caffe Latte ","Americano ","Coca-Cola ","7up ","Mirinda ","Woda " };
-	float CP[5] = { 21.99, 18.99, 15.99, 16.99, 9.99};
-	float CZ[2] = { 23.99, 17.99 };
-	float CG[6] = { 34.99, 40.99, 47.99, 38.99, 35.99, 40.99};//Dawid Gorniaczyk
-	float CD[3] = { 20.99, 18.99, 22.99 };
-	float CN[7] = { 8.99, 10.99, 9.99, 7.99, 7.99, 7.99, 6.99 };//Dawid Gorniaczyk
+/******************************     LISTA DAŃ     ******************************/
+// string typ_dania [liczba_dań][liczba_parametrów_danego_dania]	
+
+	const short int lParametrowDania = 2;	 // nazwa, cena
+	
+	const short int lPrzystawek = 5;		// liczba dostępnych przystawek
+    string przystawki[lPrzystawek][lParametrowDania] = {
+		"Tortilla Rolls (150g)", "21.99",
+		"Krazki Cebulowe (9szt)", "18.99",
+		"Salsa Nachos (150g)", "15.99",
+		"Nachos Ser (150g)", "16.99",
+		"Frytki (100g)", " 9.99"
+	};
+
+	const short int lZup = 2;
+	string zupy[lZup][lParametrowDania] = {
+		"Carpacio (200ml)","23.99",
+		"Krem z kukurydzy (200ml) ", "17.99"
+	};
+
+	const short int lDGlownych = 6;
+	string dglowne[lDGlownych][lParametrowDania] = {
+		"Quesadilla z kurczakiem (1szt)", "34.99",
+		"Enchiladas z kurczakiem (3szt)", "40.99",
+		"Enchiladas z wolowina (3szt)", "47.99",
+		"Grillowana piers z kurczaka z sosoem salsa mojito 180g)", "38.99",
+		"Tacos z kurczakiem (3 szt)", "35.99",
+		"Tacos z rostbefem (3szt)", "40.99"
+	};
+
+	const short int lDeserow = 3;
+	string desery[3][lParametrowDania] = {
+		"Brownie (150g) ", "20.99",
+		"Cremme Bruelle (100g) ", "18.99",
+		"Sernik Mango (120g) ", "22.99"
+	};
+
+	const short int lNapojow = 7;
+	string napoje[lNapojow][lParametrowDania] = {
+		"Herbata ", "8.99",
+		"Caffe Latte ", "10.99",
+		"Americano ", "9.99",
+		"Coca-Cola ", "7.99",
+		"7up ", "7.99",
+		"Mirinda ", "7.99",
+		"Woda ", "6.99"
+	};
+/*******************************************************************************/
 
 	int E;
+/*
+void wyswietl_liste_dania()
+{
+	// nameof(nazwa_tablicy)
+	for (short int i = 0; i < T; i++) {
+		for (short int j = 0; j < lParametrowDania; j++) {
+			cout << T[i][j] << "  ";
+			if (j == 1) cout << "\b\bzl";
+		}
+		cout << endl;
+	}
+}
+*/
 
 void menu_restaurant()//Maciej Witkowski
 {
@@ -48,68 +88,86 @@ void menu_restaurant()//Maciej Witkowski
 		case 1:
 			cout << "*************************************" << endl;
 			cout << "*           1.Przystawki            *" << endl;
-			cout << "*" << " 1." << P[0] << CP[0] << " zl  *" << endl;
-			cout << "*" << " 2." << P[1] << CP[1] << " zl *" << endl;
-			cout << "*" << " 3." << P[2] << CP[2] << " zl    *" << endl;
-			cout << "*" << " 4." << P[3] << CP[3] << " zl      *" << endl;
-			cout << "*" << " 5." << P[4] << CP[4] << " zl           *" << endl;//Dawid Gorniaczyk
+			for (short int i = 0; i < lPrzystawek; i++) {
+				for (short int j = 0; j < lParametrowDania; j++) {
+					cout << przystawki[i][j] << "  ";
+					if (j == 1) cout << "\b\bzl";
+				}
+				cout << endl;
+			}
 			cout << "*************************************" << endl;
 			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
 			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
 			cin >> E;
+			system("cls");
 			break;
 
 		case 2:
 			cout << "***************************************" << endl;
 			cout << "*                2.Zupy               *" << endl;
-			cout << "*" << " 1." << Z[0] << CZ[0] << " zl         *" << endl;
-			cout << "*" << " 2." << Z[1] << CZ[1] << " zl *" << endl;//Dawid Gorniaczyk
+			for (short int i = 0; i < lZup; i++) {
+				for (short int j = 0; j < lParametrowDania; j++) {
+					cout << zupy[i][j] << "  ";
+					if (j == 1) cout << "\b\bzl";
+				}
+				cout << endl;
+			}
 			cout << "***************************************" << endl;
 			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
 			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
 			cin >> E;
+			system("cls");
 			break;
 
 		case 3:
 			cout << "**********************************************************************" << endl;
 			cout << "*                             3.Dania głowne                         *" << endl;
-			cout << "*" << " 1." << G[0] << CG[0] << " zl                          *" << endl;
-			cout << "*" << " 2." << G[1] << CG[1] << " zl                          *" << endl;
-			cout << "*" << " 3." << G[2] << CG[2] << " zl                            *" << endl;//Dawid Gorniaczyk
-			cout << "*" << " 4." << G[3] << CG[3] << " zl *" << endl;
-			cout << "*" << " 5." << G[4] << CG[4] << " zl                              *" << endl;//Dawid Gorniaczyk
+			for (short int i = 0; i < lDGlownych; i++) {
+				for (short int j = 0; j < lParametrowDania; j++) {
+					cout << dglowne[i][j] << "  ";
+					if (j == 1) cout << "\b\bzl";
+				}
+				cout << endl;
+			}
 			cout << "**********************************************************************" << endl;
 			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
 			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
 			cin >> E;
+			system("cls");
 			break;
 
 		case 4:
 			cout << "************************************" << endl;
 			cout << "*           4.Desery               *" << endl;
-			cout << "*" << " 1." << D[0] << CD[0] << " zl        *" << endl;
-			cout << "*" << " 2." << D[1] << CD[1] << " zl *" << endl;
-			cout << "*" << " 3." << D[2] << CD[2] << " zl   *" << endl;//Dawid Gorniaczyk
+			for (short int i = 0; i < lDeserow; i++) {
+				for (short int j = 0; j < lParametrowDania; j++) {
+					cout << desery[i][j] << "  ";
+					if (j == 1) cout << "\b\bzl";
+				}
+				cout << endl;
+			}
 			cout << "***********************************" << endl;
 			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
 			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
 			cin >> E;
+			system("cls");
 			break;
 
 		case 5:
 			cout << "****************************" << endl;
 			cout << "*         5.Napoje         *" << endl;
-			cout << "*" << " 1." << N[0] << CN[0] << " zl        *" << endl;
-			cout << "*" << " 2." << N[1] << CN[1] << " zl   *" << endl;
-			cout << "*" << " 3." << N[2] << CN[2] << " zl      *" << endl;
-			cout << "*" << " 4." << N[3] << CN[3] << " zl      *" << endl;
-			cout << "*" << " 5." << N[4] << CN[4] << " zl            *" << endl;//Dawid Gorniaczyk
-			cout << "*" << " 6." << N[5] << CN[5] << " zl        *" << endl;
-			cout << "*" << " 7." << N[6] << CN[6] << " zl           *" << endl;//Dawid Gorniaczyk
+			for (short int i = 0; i < lNapojow; i++) {
+				for (short int j = 0; j < lParametrowDania; j++) {
+					cout << napoje[i][j] << "  ";
+					if (j == 1) cout << "\b\bzl";
+				}
+				cout << endl;
+			}
 			cout << "****************************" << endl;
 			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
 			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
 			cin >> E;
+			system("cls");
 			break;
 
 		default:
@@ -121,6 +179,7 @@ void menu_restaurant()//Maciej Witkowski
 
 int main()
 {
+	setlocale(LC_ALL, ""); // znaki PL
 	int wybor = 4;
 	for (int i = 0; i < wybor; i--)
 	{
@@ -143,10 +202,10 @@ int main()
 
 		switch (wybor)
 		{
-		case 1:
+		case 1:		// MENU RESTAURACJI
 			menu_restaurant();
 			break;
-		case 2:
+		case 2:		// KONTAKT
 			cout << "**************************************************************************************************************" << endl;
 			cout << "* Instagram : jakis instagram                                                                                *" << endl;
 			cout << "* Tel : +48 985 493 672                                                                                      *" << endl;
