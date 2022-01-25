@@ -174,9 +174,9 @@ int main()
 			cout << "* Tel : +48 985 493 672                                                                                      *" << endl;
 			cout << "* Godziny otwarcia : \n"
 					"*   Pon: zamkniete\n"
-					"*   Wt - Pt : 12:00 - 22:00\n"
-					"*   Sob : 12:00 - 24:00\n"
-					"*   Niedz 12:00 do 20:00 " << endl;
+					"*   Wt-Pt: 12:00-22:00\n"
+					"*   Sob: 12:00-24:00\n"
+					"*   Niedz: 12:00-20:00 " << endl;
 			cout << "* E-mail : tlustykrab@gmail.com                                                                              *" << endl;
 			cout << "**************************************************************************************************************" << endl;
 			cout << endl;
