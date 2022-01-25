@@ -54,19 +54,27 @@ using namespace std;
 /*******************************************************************************/
 
 	int E;
-/*
-void wyswietl_liste_dania()
+
+void wyswietl_liste_dania(const short int lDanychDan, char typ_dania)
 {
-	// nameof(nazwa_tablicy)
-	for (short int i = 0; i < T; i++) {
+	
+	for (short int i = 0; i < lDanychDan; i++) {
 		for (short int j = 0; j < lParametrowDania; j++) {
-			cout << T[i][j] << "  ";
+			if (typ_dania == 'p') cout << przystawki[i][j] << "  ";
+			else if (typ_dania == 'z') cout << zupy[i][j] << "  ";
+			else if (typ_dania == 'g') cout << dglowne[i][j] << "  ";
+			else if (typ_dania == 'd') cout << desery[i][j] << "  ";
+			else if (typ_dania == 'n') cout << napoje[i][j] << "  ";
 			if (j == 1) cout << "\b\bzl";
 		}
 		cout << endl;
 	}
+	cout << "*************************************" << endl;
+	cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
+	cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
 }
-*/
+
+	//
 
 void menu_restaurant()//Maciej Witkowski
 {
@@ -88,16 +96,7 @@ void menu_restaurant()//Maciej Witkowski
 		case 1:
 			cout << "*************************************" << endl;
 			cout << "*           1.Przystawki            *" << endl;
-			for (short int i = 0; i < lPrzystawek; i++) {
-				for (short int j = 0; j < lParametrowDania; j++) {
-					cout << przystawki[i][j] << "  ";
-					if (j == 1) cout << "\b\bzl";
-				}
-				cout << endl;
-			}
-			cout << "*************************************" << endl;
-			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
-			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
+			wyswietl_liste_dania(lPrzystawek, 'p');
 			cin >> E;
 			system("cls");
 			break;
@@ -105,16 +104,7 @@ void menu_restaurant()//Maciej Witkowski
 		case 2:
 			cout << "***************************************" << endl;
 			cout << "*                2.Zupy               *" << endl;
-			for (short int i = 0; i < lZup; i++) {
-				for (short int j = 0; j < lParametrowDania; j++) {
-					cout << zupy[i][j] << "  ";
-					if (j == 1) cout << "\b\bzl";
-				}
-				cout << endl;
-			}
-			cout << "***************************************" << endl;
-			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
-			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
+			wyswietl_liste_dania(lZup, 'z');
 			cin >> E;
 			system("cls");
 			break;
@@ -122,16 +112,7 @@ void menu_restaurant()//Maciej Witkowski
 		case 3:
 			cout << "**********************************************************************" << endl;
 			cout << "*                             3.Dania głowne                         *" << endl;
-			for (short int i = 0; i < lDGlownych; i++) {
-				for (short int j = 0; j < lParametrowDania; j++) {
-					cout << dglowne[i][j] << "  ";
-					if (j == 1) cout << "\b\bzl";
-				}
-				cout << endl;
-			}
-			cout << "**********************************************************************" << endl;
-			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
-			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
+			wyswietl_liste_dania(lPrzystawek, 'g');
 			cin >> E;
 			system("cls");
 			break;
@@ -139,16 +120,7 @@ void menu_restaurant()//Maciej Witkowski
 		case 4:
 			cout << "************************************" << endl;
 			cout << "*           4.Desery               *" << endl;
-			for (short int i = 0; i < lDeserow; i++) {
-				for (short int j = 0; j < lParametrowDania; j++) {
-					cout << desery[i][j] << "  ";
-					if (j == 1) cout << "\b\bzl";
-				}
-				cout << endl;
-			}
-			cout << "***********************************" << endl;
-			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
-			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
+			wyswietl_liste_dania(lPrzystawek, 'd');
 			cin >> E;
 			system("cls");
 			break;
@@ -156,16 +128,7 @@ void menu_restaurant()//Maciej Witkowski
 		case 5:
 			cout << "****************************" << endl;
 			cout << "*         5.Napoje         *" << endl;
-			for (short int i = 0; i < lNapojow; i++) {
-				for (short int j = 0; j < lParametrowDania; j++) {
-					cout << napoje[i][j] << "  ";
-					if (j == 1) cout << "\b\bzl";
-				}
-				cout << endl;
-			}
-			cout << "****************************" << endl;
-			cout << "1.Przystawki || 2.Zupy || 3.Dania Główne || 4.Desery || 5.Napoje" << endl;
-			cout << "Jeśli chcesz zobaczyć inne strony wprowadź numer strony 1-5" << endl;
+			wyswietl_liste_dania(lPrzystawek, 'n');
 			cin >> E;
 			system("cls");
 			break;
@@ -209,7 +172,11 @@ int main()
 			cout << "**************************************************************************************************************" << endl;
 			cout << "* Instagram : jakis instagram                                                                                *" << endl;
 			cout << "* Tel : +48 985 493 672                                                                                      *" << endl;
-			cout << "* Godziny otwarcia : Pon zamkniete | Wtr - Piat = 12:00 do 22:00 | Sob 12:00 do 24:00 | Niedz 12:00 do 20:00 *" << endl;
+			cout << "* Godziny otwarcia : \n"
+					"*   Pon: zamkniete\n"
+					"*   Wt - Pt : 12:00 - 22:00\n"
+					"*   Sob : 12:00 - 24:00\n"
+					"*   Niedz 12:00 do 20:00 " << endl;
 			cout << "* E-mail : tlustykrab@gmail.com                                                                              *" << endl;
 			cout << "**************************************************************************************************************" << endl;
 			cout << endl;
