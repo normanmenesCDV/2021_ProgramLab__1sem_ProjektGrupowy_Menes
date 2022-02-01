@@ -147,13 +147,13 @@ int main()
 	for (int i = 0; i < wybor; i--)
 	{
 		cout << "************************************" << endl;
-		cout << "* Witamy w restauracji Tlusty krab *" << endl;
-		cout << "* ul. Ratajczaka 10 Poznan         *" << endl;
+		cout << "* Witamy w restauracji Tłusty krab *" << endl;
+		cout << "* ul. Ratajczaka 10 Poznań         *" << endl;
 		cout << "*                                  *" << endl;
-		cout << "* By przejsc do :                  *" << endl;
-		cout << "* Menu dan wcisnij 1               *" << endl;
-		cout << "* Kontakt wcisnij 2                *" << endl;
-		cout << "* Zloz zamowienie wcisnij 3        *" << endl;
+		cout << "* MENU:                            *" << endl;
+		cout << "* 1. Menu dań                      *" << endl;
+		cout << "* 2. Kontakt                       *" << endl;
+		cout << "* 3. Złóż zamówienie               *" << endl;
 		cout << "* Wyjscie z programy wpisz 'e'     *" << endl;
 		cout << "************************************" << endl;
 		cout << endl;
