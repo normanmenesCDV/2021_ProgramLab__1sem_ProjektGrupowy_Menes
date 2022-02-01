@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <cstdlib>
+#include <conio.h>				// _getch()
 #include <windows.h>
 
 using namespace std;
@@ -148,6 +149,22 @@ void menu_restaurant()//Maciej Witkowski
 	}
 }
 
+void kontakt()
+{
+	cout << "**************************************************************************************************************" << endl;
+	cout << "* Instagram : jakis instagram                                                                                *" << endl;
+	cout << "* Tel : +48 985 493 672                                                                                      *" << endl;
+	cout << "* Godziny otwarcia : \n"
+		"*   Pon: zamkniete\n"
+		"*   Wt-Pt: 12:00-22:00\n"
+		"*   Sob: 12:00-24:00\n"
+		"*   Niedz: 12:00-20:00 " << endl;
+	cout << "* E-mail : tlustykrab@gmail.com                                                                              *" << endl;
+	cout << "**************************************************************************************************************" << endl;
+	cout << endl;
+	cout << endl;
+}
+
 int main()
 {
 	
@@ -169,84 +186,203 @@ int main()
 	/******************************************************************/
 
 
-	int wybor = 4;
-	for (int i = 0; i < wybor; i--)
+	
+	string tmp_string;
+	short int linijka = 0;
+	// Nazwa Restauracji
+	// 1. linijka
+	tmp_string = "************************************";
+	int tmp_string_poczatek = (c2.X) / 2 - (tmp_string.length() / 2);				// zapamiętuje w którym miejscu wyświetlić "*" na początku linijki
+	int tmp_string_koniec = (c2.X) / 2 + (tmp_string.length() / 2)-1;				// zapamiętuje w którym miejscu wyświetlić "*" na końcu linijki
+	gotoxy(tmp_string_poczatek, linijka);											// ustawia kursor tak, by tekst był wyrównany do środka linijki
+		cout << tmp_string;
+	linijka++;
+
+	// 2. linijka
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	// 3. linijka
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	tmp_string = "Restauracja \"Tłusty krab\"";
+	gotoxy((c2.X)/2-(tmp_string.length()/2), linijka);								// ustawia kursor tak, by tekst był wyrównany do środka linijki
+		cout << tmp_string;
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	// 4. linijka
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	tmp_string = "ul. Ratajczaka 10 Poznań";
+	gotoxy((c2.X) / 2 - (tmp_string.length() / 2), linijka);
+		cout << tmp_string;
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	// 5. linijka
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	// 6. linijka
+	gotoxy(tmp_string_poczatek, linijka);
+		tmp_string = "************************************";
+		cout << tmp_string;
+
+		
+	// MENU APLIKACJI
+	short int liczbaOpcjiMenu = 4;
+	linijka = 10;
+
+	tmp_string = "Wybierz opcję korzystając ze strzałek (góra / dół) i zatwierdzając przyciskiem ENTER";
+	gotoxy((c2.X) / 2 - (tmp_string.length() / 2), linijka);
+		cout << tmp_string;
+	linijka += 2;
+
+	gotoxy(tmp_string_poczatek, linijka);
+		tmp_string = "************************************";
+		cout << tmp_string;
+	linijka++;
+
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	tmp_string = "MENU APLIKACJI";
+	gotoxy((c2.X) / 2 - (tmp_string.length() / 2), linijka);
+		cout << tmp_string;
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	short int pierwszaOpcjaMenu = linijka;				// potrzebne do rysowania strzałki wyboru
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	tmp_string = "Menu restauracji";
+	gotoxy(tmp_string_poczatek + 6, linijka);
+		cout << tmp_string;
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	tmp_string = "Kontakt";
+	gotoxy(tmp_string_poczatek + 6, linijka);
+		cout << tmp_string;
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	tmp_string = "Złóż zamówienie";
+	gotoxy(tmp_string_poczatek + 6, linijka);
+		cout << tmp_string;
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	short int ostatniaOpcjaMenu = linijka;				// potrzebne do rysowania strzałki wyboru
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	tmp_string = "Wyjście";
+	gotoxy(tmp_string_poczatek + 6, linijka);
+		cout << tmp_string;
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+		
+	gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+	gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+	linijka++;
+
+	gotoxy(tmp_string_poczatek, linijka);
+		tmp_string = "************************************";
+		cout << tmp_string;
+	linijka += 2;
+
+		
+
+	// strzałki
+	short int wybor;
+	short int poprzedniWybor;
+	while (true)
 	{
-		string tmp_string;
-		short int linijka = 0;
-		// 1. linijka
-		tmp_string = "************************************";
-		int tmp_string_poczatek = (c2.X) / 2 - (tmp_string.length() / 2);				// zapamiętuje w którym miejscu wyświetlić "*" na początku linijki
-		int tmp_string_koniec = (c2.X) / 2 + (tmp_string.length() / 2)-1;				// zapamiętuje w którym miejscu wyświetlić "*" na końcu linijki
-		gotoxy(tmp_string_poczatek, linijka);
-		cout << tmp_string;
-		linijka++;
-
-		// 2. linijka
-		gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-		tmp_string = "Restauracja \"Tłusty krab\"";
-		gotoxy((c2.X)/2-(tmp_string.length()/2), linijka);		// ustaw kursor środek konsoli minus połowę długości tekstu
-		cout << tmp_string;
-		gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-		linijka++;
-
-		// 3. linijka
-		gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-		tmp_string = "ul. Ratajczaka 10 Poznań";
-		gotoxy((c2.X) / 2 - (tmp_string.length() / 2), linijka);		// ustaw kursor środek konsoli minus połowę długości tekstu
-		cout << tmp_string;
-		gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-		linijka++;
-
-		// 4. linijka
-		gotoxy(tmp_string_poczatek, linijka);
-		tmp_string = "************************************";
-		cout << tmp_string;
-
-
-		cout << endl;
-		cout << "*                                  *" << endl;
-		cout << "* MENU:                            *" << endl;
-		cout << "* 1. Menu dań                      *" << endl;
-		cout << "* 2. Kontakt                       *" << endl;
-		cout << "* 3. Złóż zamówienie               *" << endl;
-		cout << "* Wyjscie z programy wpisz 'e'     *" << endl;
-		cout << "************************************" << endl;
-		cout << endl;
-		if (!(cin >> wybor))
+		wybor = 1;
+		poprzedniWybor = wybor;
+			
+		while (true)						//przesuwanie strzałki
 		{
-			cout << "Dziekujemy za wybranie naszej restauracji" << endl;
-			exit(0);
-		}
+			//rysowanie strzałki wyboru
+			gotoxy(tmp_string_poczatek + 4, pierwszaOpcjaMenu + wybor - 1);
+			cout << static_cast <char>(16);
 
-		switch (wybor)
-		{
-		case 1:		// MENU RESTAURACJI
-			menu_restaurant();
-			break;
-		case 2:		// KONTAKT
-			cout << "**************************************************************************************************************" << endl;
-			cout << "* Instagram : jakis instagram                                                                                *" << endl;
-			cout << "* Tel : +48 985 493 672                                                                                      *" << endl;
-			cout << "* Godziny otwarcia : \n"
-					"*   Pon: zamkniete\n"
-					"*   Wt-Pt: 12:00-22:00\n"
-					"*   Sob: 12:00-24:00\n"
-					"*   Niedz: 12:00-20:00 " << endl;
-			cout << "* E-mail : tlustykrab@gmail.com                                                                              *" << endl;
-			cout << "**************************************************************************************************************" << endl;
-			cout << endl;
-			cout << endl;
-			break;
-		case 3:
-			//Wyswietla sie zloz zamowienie
-			break;
-		default:
-			cout << "Wybierz jedna z opcji " << endl;
+			//obsługa klawiatury
+			poprzedniWybor = wybor;
+			switch (_getch())
+			{
+				case 224: //STRZAŁKI
+					switch (_getch())
+					{
+						case 72: //strzałka w górę
+							if (1 < wybor) wybor--;
+							else wybor = liczbaOpcjiMenu;
+							break;
+
+						case 80: //strzałka w dół
+							if (wybor < liczbaOpcjiMenu) wybor++;
+							else wybor = 1;
+							break;
+					}
+					break;
+				case 13: //ENTER
+					gotoxy(tmp_string_poczatek, linijka);
+					switch (wybor)
+					{
+						case 1:
+							cout << "Wybrałeś: Menu restauracji";
+							// sleep
+							menu_restaurant();
+							break;
+
+						case 2:
+							cout << "Wybrałeś: Kontakt";
+							// sleep
+							kontakt();
+							break;
+							
+						case 3:
+							cout << "Wybrałeś: Złóż zamówienie";
+							// sleep
+							//Wyswietla sie zloz zamowienie
+							break;
+
+						case 4:
+							cout << "Wybrałeś: Wyjście z aplikacji";
+							//sleep
+							cout << "Dziękujemy za wybranie naszej restauracji" << endl;
+							return 0;
+					}
+			}
+
+			//czyszczenie strzałki wyboru
+			gotoxy(tmp_string_poczatek + 4, pierwszaOpcjaMenu + poprzedniWybor - 1);
+				cout << " ";
 		}
 	}
 	return 0;
