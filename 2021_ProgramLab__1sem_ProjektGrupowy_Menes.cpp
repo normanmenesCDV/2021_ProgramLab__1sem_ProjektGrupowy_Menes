@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <cstdlib>
+#include <windows.h>
 
 using namespace std;
 
@@ -54,6 +55,13 @@ using namespace std;
 /*******************************************************************************/
 
 	int E;
+
+//funkcja, która przestawia kursor konsoli w dowolne miejsce
+void gotoxy(const int x, const int y)
+{
+		COORD coord = { x, y };
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
 
 void wyswietl_liste_dania(const short int lDanychDan, char typ_dania)
 {
@@ -142,13 +150,65 @@ void menu_restaurant()//Maciej Witkowski
 
 int main()
 {
+	
 	setlocale(LC_ALL, ""); // znaki PL
+
+	/******************** USTAWIANIE ROZMIARU OKNA ********************/
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE); // uchwyt standardowego wyjścia
+	COORD c2; // struktura potrzebna do ustawienia rozmiarów bufora pamięci
+	c2.X = 120; // szerokość na 120 szerokości znaków
+	c2.Y = 30; // wysokość na 40 wysokości znaków
+	SetConsoleScreenBufferSize(handle, c2); // ustawia rozmiar bufora (wyświetlanego tekstu)
+
+	SMALL_RECT sr; // struktura wykorzystywana do ustawienia rozmiaru okna
+	sr.Left = 0; // na zero
+	sr.Top = 0; // na zero
+	sr.Right = c2.X - 1; // szerokość o 1 mniejsza od bufora
+	sr.Bottom = c2.Y - 1; // wysokość o 1 mniejsza od bufora
+	SetConsoleWindowInfo(handle, true, &sr); // ustawia rozmiar okna (jednostka to szerokość i wysokość pojedynczego znaku)
+	/******************************************************************/
+
+
 	int wybor = 4;
 	for (int i = 0; i < wybor; i--)
 	{
-		cout << "************************************" << endl;
-		cout << "* Witamy w restauracji Tłusty krab *" << endl;
-		cout << "* ul. Ratajczaka 10 Poznań         *" << endl;
+		string tmp_string;
+		short int linijka = 0;
+		// 1. linijka
+		tmp_string = "************************************";
+		int tmp_string_poczatek = (c2.X) / 2 - (tmp_string.length() / 2);				// zapamiętuje w którym miejscu wyświetlić "*" na początku linijki
+		int tmp_string_koniec = (c2.X) / 2 + (tmp_string.length() / 2)-1;				// zapamiętuje w którym miejscu wyświetlić "*" na końcu linijki
+		gotoxy(tmp_string_poczatek, linijka);
+		cout << tmp_string;
+		linijka++;
+
+		// 2. linijka
+		gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+		tmp_string = "Restauracja \"Tłusty krab\"";
+		gotoxy((c2.X)/2-(tmp_string.length()/2), linijka);		// ustaw kursor środek konsoli minus połowę długości tekstu
+		cout << tmp_string;
+		gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+		linijka++;
+
+		// 3. linijka
+		gotoxy(tmp_string_poczatek, linijka);
+		cout << "*";
+		tmp_string = "ul. Ratajczaka 10 Poznań";
+		gotoxy((c2.X) / 2 - (tmp_string.length() / 2), linijka);		// ustaw kursor środek konsoli minus połowę długości tekstu
+		cout << tmp_string;
+		gotoxy(tmp_string_koniec, linijka);
+		cout << "*";
+		linijka++;
+
+		// 4. linijka
+		gotoxy(tmp_string_poczatek, linijka);
+		tmp_string = "************************************";
+		cout << tmp_string;
+
+
+		cout << endl;
 		cout << "*                                  *" << endl;
 		cout << "* MENU:                            *" << endl;
 		cout << "* 1. Menu dań                      *" << endl;
