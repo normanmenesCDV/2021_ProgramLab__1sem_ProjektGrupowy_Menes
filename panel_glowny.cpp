@@ -214,12 +214,13 @@ void menu_aplikacji() {
 				case 3:
 					cout << "Wybra³eœ: Z³ó¿ zamówienie";
 					// sleep
-					//Wyswietla sie zloz zamowienie
+					zloz_zamowienie();
 					break;
 
 				case 4:
-					cout << "Wybra³eœ: Wyjœcie z aplikacji";
+					cout << "Wybra³eœ: Wyjœcie z aplikacji" << endl;
 					//sleep
+					gotoxy(tmp_string_poczatek, linijka+1);
 					cout << "Dziêkujemy za wybranie naszej restauracji" << endl;
 					exit(0);
 				}
@@ -237,3 +238,5 @@ void menu_aplikacji() {
 		}
 	}
 }
+
+

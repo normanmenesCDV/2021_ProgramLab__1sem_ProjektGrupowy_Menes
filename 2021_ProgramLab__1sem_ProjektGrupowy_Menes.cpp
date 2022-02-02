@@ -12,6 +12,7 @@ using namespace std;
 const short int rozmiarX = 120;					// do ustawienia szerokości okna
 
 
+
 int main()
 {
 	
@@ -32,55 +33,7 @@ int main()
 	SetConsoleWindowInfo(handle, true, &sr); // ustawia rozmiar okna (jednostka to szerokość i wysokość pojedynczego znaku)
 	/******************************************************************/	
 	
-	//menu_aplikacji();
-	naglowek_restauracji();
-	string tmp_string;
-	tmp_string = "ZŁÓŻ ZAMÓWIENIE";
-	gotoxy(rozmiarX / 2 - (tmp_string.length() / 2), 8);
-	cout << tmp_string << endl << endl;
-
-	string imie_nazwisko_klienta;
-	short int nrZamowienia = 1;
-	string lokalizacja;	// "na miejscu" / "na wynos"
-	short int nrStolika;
-	string adres;
-
-	cout << "Nr zamówienia: " << nrZamowienia << endl;
-
-	cout << "Imię i nazwisko: ";
-	getline(cin, imie_nazwisko_klienta);
-
-	cout << "Zamówienie będzie realizowane\n"
-			"  1. na miejscu\n"
-			"  2. na wynos\n";
-	cout << "Opcja: _\b";
-	char tmp_lokalizacja;
-	do {
-		tmp_lokalizacja = _getch();
-	} while (tmp_lokalizacja != '1' and tmp_lokalizacja != '2');
-	switch (tmp_lokalizacja)
-	{
-		case '1':
-			lokalizacja = "na miejscu";
-			cout << lokalizacja << endl;
-			do {
-				cout << "Nr stolika (1-23): ";
-				cin >> nrStolika;
-			} while (nrStolika < 1 or nrStolika > 23);
-
-			break;
-		case '2':
-			lokalizacja = "na wynos";
-			cout << lokalizacja << endl;
-
-			cout << "Obejmujemy dostawę i zamówienia, tylko w powiecie poznańskim - zamówienia spoza tego obszaru nie będą realizowane." << endl;
-			cout << "Adres dostawy: " << endl;
-			getline(cin, adres);
-			// czas dostawy
-			break;
-	}
-	system("cls");
-	naglowek_restauracji();
+	menu_aplikacji();
 
 	return 0;
 }
