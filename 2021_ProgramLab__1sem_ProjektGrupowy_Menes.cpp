@@ -3,8 +3,11 @@
 #include <cstdlib>
 #include <conio.h>				// _getch()
 #include <windows.h>
+#include "header.hpp";
 
 using namespace std;
+
+const short int rozmiarX = 120;					// do ustawienia szerokości okna
 
 /******************************     LISTA DAŃ     ******************************/
 // string typ_dania [liczba_dań][liczba_parametrów_danego_dania]	
@@ -57,12 +60,10 @@ using namespace std;
 
 	int E;
 
-//funkcja, która przestawia kursor konsoli w dowolne miejsce
-void gotoxy(const int x, const int y)
-{
-		COORD coord = { x, y };
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
+
+
+
+
 
 void wyswietl_liste_dania(const short int lDanychDan, char typ_dania)
 {
@@ -149,21 +150,7 @@ void menu_restaurant()//Maciej Witkowski
 	}
 }
 
-void kontakt()
-{
-	cout << "**************************************************************************************************************" << endl;
-	cout << "* Instagram : jakis instagram                                                                                *" << endl;
-	cout << "* Tel : +48 985 493 672                                                                                      *" << endl;
-	cout << "* Godziny otwarcia : \n"
-		"*   Pon: zamkniete\n"
-		"*   Wt-Pt: 12:00-22:00\n"
-		"*   Sob: 12:00-24:00\n"
-		"*   Niedz: 12:00-20:00 " << endl;
-	cout << "* E-mail : tlustykrab@gmail.com                                                                              *" << endl;
-	cout << "**************************************************************************************************************" << endl;
-	cout << endl;
-	cout << endl;
-}
+
 
 int main()
 {
@@ -173,217 +160,19 @@ int main()
 	/******************** USTAWIANIE ROZMIARU OKNA ********************/
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE); // uchwyt standardowego wyjścia
 	COORD c2; // struktura potrzebna do ustawienia rozmiarów bufora pamięci
-	c2.X = 120; // szerokość na 120 szerokości znaków
-	c2.Y = 30; // wysokość na 40 wysokości znaków
+	c2.X = rozmiarX; // szerokość na 120 szerokości znaków
+	//c2.Y = 30; // wysokość na 40 wysokości znaków (usuwa suwak)
 	SetConsoleScreenBufferSize(handle, c2); // ustawia rozmiar bufora (wyświetlanego tekstu)
 
 	SMALL_RECT sr; // struktura wykorzystywana do ustawienia rozmiaru okna
 	sr.Left = 0; // na zero
 	sr.Top = 0; // na zero
 	sr.Right = c2.X - 1; // szerokość o 1 mniejsza od bufora
-	sr.Bottom = c2.Y - 1; // wysokość o 1 mniejsza od bufora
+	//sr.Bottom = c2.Y - 1; // wysokość o 1 mniejsza od bufora (usuwa suwak)
 	SetConsoleWindowInfo(handle, true, &sr); // ustawia rozmiar okna (jednostka to szerokość i wysokość pojedynczego znaku)
-	/******************************************************************/
+	/******************************************************************/	
 
-
+	menu_aplikacji();
 	
-	string tmp_string;
-	short int linijka = 0;
-	// Nazwa Restauracji
-	// 1. linijka
-	tmp_string = "************************************";
-	int tmp_string_poczatek = (c2.X) / 2 - (tmp_string.length() / 2);				// zapamiętuje w którym miejscu wyświetlić "*" na początku linijki
-	int tmp_string_koniec = (c2.X) / 2 + (tmp_string.length() / 2)-1;				// zapamiętuje w którym miejscu wyświetlić "*" na końcu linijki
-	gotoxy(tmp_string_poczatek, linijka);											// ustawia kursor tak, by tekst był wyrównany do środka linijki
-		cout << tmp_string;
-	linijka++;
-
-	// 2. linijka
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	// 3. linijka
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	tmp_string = "Restauracja \"Tłusty krab\"";
-	gotoxy((c2.X)/2-(tmp_string.length()/2), linijka);								// ustawia kursor tak, by tekst był wyrównany do środka linijki
-		cout << tmp_string;
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	// 4. linijka
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	tmp_string = "ul. Ratajczaka 10 Poznań";
-	gotoxy((c2.X) / 2 - (tmp_string.length() / 2), linijka);
-		cout << tmp_string;
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	// 5. linijka
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	// 6. linijka
-	gotoxy(tmp_string_poczatek, linijka);
-		tmp_string = "************************************";
-		cout << tmp_string;
-
-		
-	// MENU APLIKACJI
-	short int liczbaOpcjiMenu = 4;
-	linijka = 10;
-
-	tmp_string = "Wybierz opcję korzystając ze strzałek (góra / dół) i zatwierdzając przyciskiem ENTER";
-	gotoxy((c2.X) / 2 - (tmp_string.length() / 2), linijka);
-		cout << tmp_string;
-	linijka += 2;
-
-	gotoxy(tmp_string_poczatek, linijka);
-		tmp_string = "************************************";
-		cout << tmp_string;
-	linijka++;
-
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	tmp_string = "MENU APLIKACJI";
-	gotoxy((c2.X) / 2 - (tmp_string.length() / 2), linijka);
-		cout << tmp_string;
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	short int pierwszaOpcjaMenu = linijka;				// potrzebne do rysowania strzałki wyboru
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	tmp_string = "Menu restauracji";
-	gotoxy(tmp_string_poczatek + 6, linijka);
-		cout << tmp_string;
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	tmp_string = "Kontakt";
-	gotoxy(tmp_string_poczatek + 6, linijka);
-		cout << tmp_string;
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	tmp_string = "Złóż zamówienie";
-	gotoxy(tmp_string_poczatek + 6, linijka);
-		cout << tmp_string;
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	short int ostatniaOpcjaMenu = linijka;				// potrzebne do rysowania strzałki wyboru
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	tmp_string = "Wyjście";
-	gotoxy(tmp_string_poczatek + 6, linijka);
-		cout << tmp_string;
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-		
-	gotoxy(tmp_string_poczatek, linijka);
-		cout << "*";
-	gotoxy(tmp_string_koniec, linijka);
-		cout << "*";
-	linijka++;
-
-	gotoxy(tmp_string_poczatek, linijka);
-		tmp_string = "************************************";
-		cout << tmp_string;
-	linijka += 2;
-
-		
-
-	// strzałki
-	short int wybor;
-	short int poprzedniWybor;
-	while (true)
-	{
-		wybor = 1;
-		poprzedniWybor = wybor;
-			
-		while (true)						//przesuwanie strzałki
-		{
-			//rysowanie strzałki wyboru
-			gotoxy(tmp_string_poczatek + 4, pierwszaOpcjaMenu + wybor - 1);
-			cout << static_cast <char>(16);
-
-			//obsługa klawiatury
-			poprzedniWybor = wybor;
-			switch (_getch())
-			{
-				case 224: //STRZAŁKI
-					switch (_getch())
-					{
-						case 72: //strzałka w górę
-							if (1 < wybor) wybor--;
-							else wybor = liczbaOpcjiMenu;
-							break;
-
-						case 80: //strzałka w dół
-							if (wybor < liczbaOpcjiMenu) wybor++;
-							else wybor = 1;
-							break;
-					}
-					break;
-				case 13: //ENTER
-					gotoxy(tmp_string_poczatek, linijka);
-					switch (wybor)
-					{
-						case 1:
-							cout << "Wybrałeś: Menu restauracji";
-							// sleep
-							menu_restaurant();
-							break;
-
-						case 2:
-							cout << "Wybrałeś: Kontakt";
-							// sleep
-							kontakt();
-							break;
-							
-						case 3:
-							cout << "Wybrałeś: Złóż zamówienie";
-							// sleep
-							//Wyswietla sie zloz zamowienie
-							break;
-
-						case 4:
-							cout << "Wybrałeś: Wyjście z aplikacji";
-							//sleep
-							cout << "Dziękujemy za wybranie naszej restauracji" << endl;
-							return 0;
-					}
-			}
-
-			//czyszczenie strzałki wyboru
-			gotoxy(tmp_string_poczatek + 4, pierwszaOpcjaMenu + poprzedniWybor - 1);
-				cout << " ";
-		}
-	}
 	return 0;
 }
