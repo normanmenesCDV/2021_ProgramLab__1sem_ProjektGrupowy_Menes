@@ -140,6 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="2021_ProgramLab__1sem_ProjektGrupowy_Menes.cpp" />
+    <ClCompile Include="kontakt.cpp" />
+    <ClCompile Include="menu_restauracji.cpp" />
+    <ClCompile Include="panel_glowny.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="kontakt.hpp" />
+    <ClInclude Include="menu_restauracji.hpp" />
+    <ClInclude Include="panel_glowny.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
