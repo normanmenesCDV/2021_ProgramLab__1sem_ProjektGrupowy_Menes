@@ -11,6 +11,17 @@ using namespace std;
 
 const short int rozmiarX = 120;					// do ustawienia szerokoœci okna
 
+string imie_nazwisko_klienta;
+	short int nrZamowienia = 1;
+	string lokalizacja;	// "na miejscu" / "na wynos"
+	short int nrStolika;
+	string adres;
+
+// string zamowienie [max_liczba_zamowionych_ró¿nych_dañ][liczba_parametrów (nazwa, cena, iloœæ)]
+string zamowienie[40][3];
+
+short int liczba_zamowionych_ró¿nych_dañ = 0;
+
 /******************************     LISTA DAÑ     ******************************/
 // string typ_dania [liczba_dañ][liczba_parametrów_danego_dania]	
 
@@ -296,8 +307,10 @@ void zamowienie_wyswietl_liste_dania(const short int lDanychDan, char typ_dania,
 	short int tmp_linijka = linijka - 1;
 	for (short int i = 0; i < lDanychDan; i++) {
 		tmp_linijka++;
+		gotoxy(0, tmp_linijka);
+		cout << i + 1 << ". ";
 		for (short int j = 0; j < lParametrowDania; j++) {
-			if (j == 0) gotoxy(2, tmp_linijka);
+			if (j == 0) gotoxy(3, tmp_linijka);
 			else if (j == 1) gotoxy(74, tmp_linijka);
 
 			if (typ_dania == 'p') cout << przystawki[i][j] << "  ";
@@ -309,6 +322,31 @@ void zamowienie_wyswietl_liste_dania(const short int lDanychDan, char typ_dania,
 		}
 		cout << endl;
 	}
+	short int tmp_nrDania;
+	short int tmp_lPorcji;
+	double tmp_cena;
+	cout << "Numer dania: ";
+	cin >> tmp_nrDania;
+	cout << "Podaj liczbê porcji: ";
+	cin >> tmp_lPorcji;
+	cout << "Wybra³eœ: ";
+	if (typ_dania == 'p') cout << przystawki[tmp_nrDania - 1][0];
+	else if (typ_dania == 'z') cout << zupy[tmp_nrDania - 1][0];
+	else if (typ_dania == 'g') cout << dglowne[tmp_nrDania - 1][0];
+	else if (typ_dania == 'd') cout << desery[tmp_nrDania - 1][0];
+	else if (typ_dania == 'n') cout << napoje[tmp_nrDania - 1][0];
+	cout << "   [ x" << tmp_lPorcji << " ]";
+	cout << "   za: ";
+	if (typ_dania == 'p') tmp_cena = stod(przystawki[tmp_nrDania - 1][1]);
+	else if (typ_dania == 'z') tmp_cena = stod(zupy[tmp_nrDania - 1][1]);
+	else if (typ_dania == 'g') tmp_cena = stod(dglowne[tmp_nrDania - 1][1]);
+	else if (typ_dania == 'd') tmp_cena = stod(desery[tmp_nrDania - 1][1]);
+	else if (typ_dania == 'n') tmp_cena = stod(napoje[tmp_nrDania - 1][1]);
+	cout << tmp_cena << " / sztukê" << endl;
+	_getch();
+
+	//zamowienie[liczba_zamowionych_ró¿nych_dañ][0] =
+	wyswietlanie_zamowienia();
 }
 
 
@@ -319,7 +357,7 @@ void skladanie_zamowienia_menu()
 	const short int liczbaOpcjiMenuRestauracji = 6;
 	short int linijka = 10;
 
-	tmp_string = "Wybierz, któr¹ kartê chcesz obejrzeæ";
+	tmp_string = "Wybierz, z której karty chcesz zamówiæ danie";
 	gotoxy(rozmiarX / 2 - (tmp_string.length() / 2), linijka);
 	cout << tmp_string;
 	linijka += 2;
@@ -518,12 +556,6 @@ void zloz_zamowienie() {
 	gotoxy(rozmiarX / 2 - (tmp_string.length() / 2), 8);
 	cout << tmp_string << endl << endl;
 
-	string imie_nazwisko_klienta;
-	short int nrZamowienia = 1;
-	string lokalizacja;	// "na miejscu" / "na wynos"
-	short int nrStolika;
-	string adres;
-
 	cout << "Nr zamówienia: " << nrZamowienia << endl;
 
 	cout << "Imiê i nazwisko: ";
@@ -558,7 +590,18 @@ void zloz_zamowienie() {
 		// czas dostawy
 		break;
 	}
-	system("cls");
-	naglowek_restauracji();
+	wyswietlanie_zamowienia();
+}
 
+void wyswietlanie_zamowienia() {
+	naglowek_restauracji();
+	string tmp_string = "Z£Ó¯ ZAMÓWIENIE";
+	gotoxy(rozmiarX / 2 - (tmp_string.length() / 2), 8);
+	cout << tmp_string << endl << endl;
+	cout << endl << endl;
+	cout << "Nr zamowienia: " << nrZamowienia << endl;
+	cout << "Imie i nazwisko: " << imie_nazwisko_klienta << endl;
+	cout << "Lokalizacja: " << lokalizacja << endl;
+	if (lokalizacja == "na miejscu") cout << "Numer stolika: " << nrStolika << endl;
+	skladanie_zamowienia_menu();
 }
