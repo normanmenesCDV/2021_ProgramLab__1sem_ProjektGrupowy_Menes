@@ -12,15 +12,16 @@ using namespace std;
 const short int rozmiarX = 120;					// do ustawienia szerokoœci okna
 
 string imie_nazwisko_klienta;
-	short int nrZamowienia = 1;
-	string lokalizacja;	// "na miejscu" / "na wynos"
-	short int nrStolika;
-	string adres;
+short int nrZamowienia = 1;
+string lokalizacja;	// "na miejscu" / "na wynos"
+short int nrStolika;
+string adres;
 
 // string zamowienie [max_liczba_zamowionych_ró¿nych_dañ][liczba_parametrów (nazwa, cena, iloœæ)]
 string zamowienie[40][3];
+double do_zaplaty = 0;
 
-short int liczba_zamowionych_ró¿nych_dañ = 0;
+short int liczba_zamowionych_dan = 0;
 
 /******************************     LISTA DAÑ     ******************************/
 // string typ_dania [liczba_dañ][liczba_parametrów_danego_dania]	
@@ -29,45 +30,45 @@ const short int lParametrowDania = 2;	 // nazwa, cena
 
 const short int lPrzystawek = 5;		// liczba dostêpnych przystawek
 string przystawki[lPrzystawek][lParametrowDania] = {
-	"Tortilla Rolls (150g)", "21.99",
-	"Krazki Cebulowe (9szt)", "18.99",
-	"Salsa Nachos (150g)", "15.99",
-	"Nachos Ser (150g)", "16.99",
-	"Frytki (100g)", " 9.99"
+	"Tortilla Rolls (150g)", "21,99",
+	"Krazki Cebulowe (9szt)", "18,99",
+	"Salsa Nachos (150g)", "15,99",
+	"Nachos Ser (150g)", "16,99",
+	"Frytki (100g)", " 9,99"
 };
 
 const short int lZup = 2;
 string zupy[lZup][lParametrowDania] = {
-	"Carpacio (200ml)","23.99",
-	"Krem z kukurydzy (200ml) ", "17.99"
+	"Carpacio (200ml)","23,99",
+	"Krem z kukurydzy (200ml) ", "17,99"
 };
 
 const short int lDGlownych = 6;
 string dglowne[lDGlownych][lParametrowDania] = {
-	"Quesadilla z kurczakiem (1szt)", "34.99",
-	"Enchiladas z kurczakiem (3szt)", "40.99",
-	"Enchiladas z wolowina (3szt)", "47.99",
-	"Grillowana piers z kurczaka z sosoem salsa mojito 180g)", "38.99",
-	"Tacos z kurczakiem (3 szt)", "35.99",
-	"Tacos z rostbefem (3szt)", "40.99"
+	"Quesadilla z kurczakiem (1szt)", "34,99",
+	"Enchiladas z kurczakiem (3szt)", "40,99",
+	"Enchiladas z wolowina (3szt)", "47,99",
+	"Grillowana piers z kurczaka z sosoem salsa mojito 180g)", "38,99",
+	"Tacos z kurczakiem (3 szt)", "35,99",
+	"Tacos z rostbefem (3szt)", "40,99"
 };
 
 const short int lDeserow = 3;
 string desery[3][lParametrowDania] = {
-	"Brownie (150g) ", "20.99",
-	"Cremme Bruelle (100g) ", "18.99",
-	"Sernik Mango (120g) ", "22.99"
+	"Brownie (150g) ", "20,99",
+	"Cremme Bruelle (100g) ", "18,99",
+	"Sernik Mango (120g) ", "22,99"
 };
 
 const short int lNapojow = 7;
 string napoje[lNapojow][lParametrowDania] = {
-	"Herbata ", "8.99",
-	"Caffe Latte ", "10.99",
-	"Americano ", "9.99",
-	"Coca-Cola ", "7.99",
-	"7up ", "7.99",
-	"Mirinda ", "7.99",
-	"Woda ", "6.99"
+	"Herbata ", "8,99",
+	"Caffe Latte ", "10,99",
+	"Americano ", "9,99",
+	"Coca-Cola ", "7,99",
+	"7up ", "7,99",
+	"Mirinda ", "7,99",
+	"Woda ", "6,99"
 };
 /*******************************************************************************/
 
@@ -260,21 +261,21 @@ void menu_restauracji()
 					tmp_string = "DANIA G£ÓWNE";
 					gotoxy(80 / 2 - (tmp_string.length() / 2), linijka);
 					cout << tmp_string;
-					wyswietl_liste_dania(lPrzystawek, 'g', linijka + 1);
+					wyswietl_liste_dania(lDGlownych, 'g', linijka + 1);
 					break;
 
 				case 4:
 					tmp_string = "DESERY";
 					gotoxy(80 / 2 - (tmp_string.length() / 2), linijka);
 					cout << tmp_string;
-					wyswietl_liste_dania(lPrzystawek, 'd', linijka + 1);
+					wyswietl_liste_dania(lDeserow, 'd', linijka + 1);
 					break;
 
 				case 5:
 					tmp_string = "NAPOJE";
 					gotoxy(80 / 2 - (tmp_string.length() / 2), linijka);
 					cout << tmp_string;
-					wyswietl_liste_dania(lPrzystawek, 'n', linijka + 1);
+					wyswietl_liste_dania(lNapojow, 'n', linijka + 1);
 					break;
 
 				case 6:
@@ -330,11 +331,12 @@ void zamowienie_wyswietl_liste_dania(const short int lDanychDan, char typ_dania,
 	cout << "Podaj liczbê porcji: ";
 	cin >> tmp_lPorcji;
 	cout << "Wybra³eœ: ";
-	if (typ_dania == 'p') cout << przystawki[tmp_nrDania - 1][0];
-	else if (typ_dania == 'z') cout << zupy[tmp_nrDania - 1][0];
-	else if (typ_dania == 'g') cout << dglowne[tmp_nrDania - 1][0];
-	else if (typ_dania == 'd') cout << desery[tmp_nrDania - 1][0];
-	else if (typ_dania == 'n') cout << napoje[tmp_nrDania - 1][0];
+	if (typ_dania == 'p') { cout << przystawki[tmp_nrDania - 1][0]; zamowienie[liczba_zamowionych_dan][0] = przystawki[tmp_nrDania - 1][0]; }
+	else if (typ_dania == 'z') { cout << zupy[tmp_nrDania - 1][0]; zamowienie[liczba_zamowionych_dan][0] = zupy[tmp_nrDania - 1][0]; }
+	else if (typ_dania == 'g') { cout << dglowne[tmp_nrDania - 1][0]; zamowienie[liczba_zamowionych_dan][0] = dglowne[tmp_nrDania - 1][0]; }
+	else if (typ_dania == 'd') { cout << desery[tmp_nrDania - 1][0]; zamowienie[liczba_zamowionych_dan][0] = desery[tmp_nrDania - 1][0]; }
+	else if (typ_dania == 'n') { cout << napoje[tmp_nrDania - 1][0]; zamowienie[liczba_zamowionych_dan][0] = napoje[tmp_nrDania - 1][0]; }
+	zamowienie[liczba_zamowionych_dan][2] = to_string(tmp_lPorcji);
 	cout << "   [ x" << tmp_lPorcji << " ]";
 	cout << "   za: ";
 	if (typ_dania == 'p') tmp_cena = stod(przystawki[tmp_nrDania - 1][1]);
@@ -342,10 +344,14 @@ void zamowienie_wyswietl_liste_dania(const short int lDanychDan, char typ_dania,
 	else if (typ_dania == 'g') tmp_cena = stod(dglowne[tmp_nrDania - 1][1]);
 	else if (typ_dania == 'd') tmp_cena = stod(desery[tmp_nrDania - 1][1]);
 	else if (typ_dania == 'n') tmp_cena = stod(napoje[tmp_nrDania - 1][1]);
+	zamowienie[liczba_zamowionych_dan][1] = to_string(tmp_cena);
 	cout << tmp_cena << " / sztukê" << endl;
+	cout << "£¹czna cena: " << tmp_cena * tmp_lPorcji << endl;
+	do_zaplaty += tmp_cena * tmp_lPorcji;
+	liczba_zamowionych_dan++;
+	cout << "Naciœnij dowolny klawisz...";
 	_getch();
-
-	//zamowienie[liczba_zamowionych_ró¿nych_dañ][0] =
+	
 	wyswietlanie_zamowienia();
 }
 
@@ -513,21 +519,21 @@ void skladanie_zamowienia_menu()
 					tmp_string = "DANIA G£ÓWNE";
 					gotoxy(80 / 2 - (tmp_string.length() / 2), linijka);
 					cout << tmp_string;
-					zamowienie_wyswietl_liste_dania(lPrzystawek, 'g', linijka + 1);
+					zamowienie_wyswietl_liste_dania(lDGlownych, 'g', linijka + 1);
 					break;
 
 				case 4:
 					tmp_string = "DESERY";
 					gotoxy(80 / 2 - (tmp_string.length() / 2), linijka);
 					cout << tmp_string;
-					zamowienie_wyswietl_liste_dania(lPrzystawek, 'd', linijka + 1);
+					zamowienie_wyswietl_liste_dania(lDeserow, 'd', linijka + 1);
 					break;
 
 				case 5:
 					tmp_string = "NAPOJE";
 					gotoxy(80 / 2 - (tmp_string.length() / 2), linijka);
 					cout << tmp_string;
-					zamowienie_wyswietl_liste_dania(lPrzystawek, 'n', linijka + 1);
+					zamowienie_wyswietl_liste_dania(lNapojow, 'n', linijka + 1);
 					break;
 
 				case 6:
@@ -603,5 +609,33 @@ void wyswietlanie_zamowienia() {
 	cout << "Imie i nazwisko: " << imie_nazwisko_klienta << endl;
 	cout << "Lokalizacja: " << lokalizacja << endl;
 	if (lokalizacja == "na miejscu") cout << "Numer stolika: " << nrStolika << endl;
+	tmp_string = "LISTA ZAMÓWIONYCH DAÑ";
+	gotoxy(rozmiarX / 2 - (tmp_string.length() / 2), 36);
+	cout << tmp_string << endl;
+	tmp_string = "=====================";
+	gotoxy(rozmiarX / 2 - (tmp_string.length() / 2), 37);
+	cout << tmp_string << endl;
+
+
+
+	short int tmp_linijka = 38;
+	for (short int i = 0; i < liczba_zamowionych_dan; i++) {
+		tmp_linijka++;
+		gotoxy(0, tmp_linijka);
+		cout << i + 1 << ". ";
+		for (short int j = 0; j < 3; j++) {
+			if (j == 0) gotoxy(3, tmp_linijka);
+			else if (j == 1) gotoxy(74, tmp_linijka);
+			else if (j == 2) { gotoxy(97, tmp_linijka); cout << "[ x "; }
+			cout << zamowienie[i][j];
+			if (j == 1) cout << "\b\bzl / szt.";
+			else if (j == 2) cout << " ]";
+		}
+		cout << endl;
+	}
+	cout << endl;
+	cout << "---------------------" << endl;
+	cout << "Do zap³aty: " << do_zaplaty << " z³" << endl;
 	skladanie_zamowienia_menu();
 }
+
