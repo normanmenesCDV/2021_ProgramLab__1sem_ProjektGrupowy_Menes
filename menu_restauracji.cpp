@@ -16,6 +16,7 @@ short int nrZamowienia = 1;
 string lokalizacja;	// "na miejscu" / "na wynos"
 short int nrStolika;
 string adres;
+string godzina;
 
 // string zamowienie [max_liczba_zamowionych_ró¿nych_dañ][liczba_parametrów (nazwa, cena, iloœæ)]
 string zamowienie[40][3];
@@ -538,7 +539,7 @@ void skladanie_zamowienia_menu()
 
 				case 6:
 					cout << "Zakoñcz sk³adanie zamówienia";
-					// !!!!!!! ///
+					raport();
 				}
 				break;
 			case 27: //ESC
@@ -593,7 +594,8 @@ void zloz_zamowienie() {
 		cout << "Obejmujemy dostawê i zamówienia, tylko w powiecie poznañskim - zamówienia spoza tego obszaru nie bêd¹ realizowane." << endl;
 		cout << "Adres dostawy: " << endl;
 		getline(cin, adres);
-		// czas dostawy
+		cout << "Podaj godzinê dostawy (hh:MM): " << endl;
+		getline(cin, godzina);
 		break;
 	}
 	wyswietlanie_zamowienia();
@@ -609,6 +611,7 @@ void wyswietlanie_zamowienia() {
 	cout << "Imie i nazwisko: " << imie_nazwisko_klienta << endl;
 	cout << "Lokalizacja: " << lokalizacja << endl;
 	if (lokalizacja == "na miejscu") cout << "Numer stolika: " << nrStolika << endl;
+	else if (lokalizacja == "na wynos") { cout << "Adres: " << adres << endl << "Godzina: " << godzina << endl; }
 	tmp_string = "LISTA ZAMÓWIONYCH DAÑ";
 	gotoxy(rozmiarX / 2 - (tmp_string.length() / 2), 36);
 	cout << tmp_string << endl;
@@ -628,7 +631,7 @@ void wyswietlanie_zamowienia() {
 			else if (j == 1) gotoxy(74, tmp_linijka);
 			else if (j == 2) { gotoxy(97, tmp_linijka); cout << "[ x "; }
 			cout << zamowienie[i][j];
-			if (j == 1) cout << "\b\bzl / szt.";
+			if (j == 1) cout << "\b\b\b\bzl / szt.";
 			else if (j == 2) cout << " ]";
 		}
 		cout << endl;
@@ -639,3 +642,56 @@ void wyswietlanie_zamowienia() {
 	skladanie_zamowienia_menu();
 }
 
+void raport() {
+	naglowek_restauracji();
+	string tmp_string;
+	cout << endl;
+	cout << "Nr zamowienia: " << nrZamowienia << endl;
+	cout << "Imie i nazwisko: " << imie_nazwisko_klienta << endl;
+	cout << "Lokalizacja: " << lokalizacja << endl;
+	if (lokalizacja == "na miejscu") cout << "Numer stolika: " << nrStolika << endl;
+	else if (lokalizacja == "na wynos") { cout << "Adres: " << adres << endl << "Godzina: " << godzina << endl; }
+	tmp_string = "LISTA ZAMÓWIONYCH DAÑ";
+	gotoxy(rozmiarX / 2 - (tmp_string.length() / 2), 18);
+	cout << tmp_string << endl;
+	tmp_string = "=====================";
+	gotoxy(rozmiarX / 2 - (tmp_string.length() / 2), 19);
+	cout << tmp_string << endl;
+
+
+
+	short int tmp_linijka = 20;
+	for (short int i = 0; i < liczba_zamowionych_dan; i++) {
+		tmp_linijka++;
+		gotoxy(0, tmp_linijka);
+		cout << i + 1 << ". ";
+		for (short int j = 0; j < 3; j++) {
+			if (j == 0) gotoxy(3, tmp_linijka);
+			else if (j == 1) gotoxy(74, tmp_linijka);
+			else if (j == 2) { gotoxy(97, tmp_linijka); cout << "[ x "; }
+			cout << zamowienie[i][j];
+			if (j == 1) cout << "\b\b\b\bzl / szt.";
+			else if (j == 2) cout << " ]";
+		}
+		cout << endl;
+	}
+	cout << endl;
+	cout << "---------------------" << endl;
+	cout << "Do zap³aty: " << do_zaplaty << " z³" << endl << endl;
+
+	cout << "P³atnoœæ\n"
+		"  1. kart¹\n"
+		"  2. gotówk¹\n";
+	cout << "Opcja: _\b";
+	char tmp_platnosc;
+	string platnosc;
+	do {
+		tmp_platnosc = _getch();
+	} while (tmp_platnosc != '1' and tmp_platnosc != '2');
+	if (tmp_platnosc == '1') platnosc = "kart¹";
+	else if (tmp_platnosc == '2') platnosc = "gotówk¹";
+	cout << platnosc << endl;
+	cout << "Dziêkujemy za skorzystanie z us³ug naszej restauracji" << endl;
+	_getch();
+	exit(0);
+}
