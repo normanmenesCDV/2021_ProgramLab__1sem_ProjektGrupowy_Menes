@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="2021_ProgramLab__1sem_ProjektGrupowy_Menes.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="kontakt.cpp" />
     <ClCompile Include="menu_restauracji.cpp" />
     <ClCompile Include="panel_glowny.cpp" />
